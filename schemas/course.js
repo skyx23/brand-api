@@ -7,5 +7,5 @@ const course = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Subject'
     }]
-})
+},{versionKey : false})
 module.exports  = mongoose.model('Course',course);

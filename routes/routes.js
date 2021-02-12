@@ -15,22 +15,28 @@ const {
   add_subject,
   add_course,
   add_user_subject,
+  add_sub_brand
 } = require('../controller/index');
 
 router.post('/register',validator, admin_regiseter);
 
 router.post('/login',validator, admin_login);
 
-router.post('/user/add', verify, validator, add_user);
+router.post('/sub_brand/add' , verify , add_sub_brand);
 
-router.get('/user/get', verify, get_user);
+router.post('/member/add', verify, validator, add_user);
 
-router.post('/user/login',validator, user_login);
+router.get('/member/get', verify, get_user);
+
+router.post('/member/login',validator, user_login);
 
 router.post('/subject/add', verify, add_subject);
 
 router.post('/course/add', verify, add_course);
 
-router.post('/user/subject/add', verify, add_user_subject);
+router.post('/member/subject/add', verify, add_user_subject);
 
 module.exports = router;
+
+
+// PORT = https://brandapi12.herokuapp.com/

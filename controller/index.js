@@ -6,7 +6,7 @@ const user_login = require('./user_login');
 const add_subject = require('./add_subject');
 const add_course = require('./add_course');
 const add_user_subject = require('./add_user_subject');
-
+const add_sub_brand = require('./add_sub_brand');
 module.exports = {
   admin_regiseter,
   admin_login,
@@ -16,4 +16,5 @@ module.exports = {
   add_subject,
   add_course,
   add_user_subject,
+  add_sub_brand
 };

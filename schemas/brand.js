@@ -10,10 +10,10 @@ const brands = mongoose.Schema(
     password: {
       type: String,
     },
-    location: [
+    sub_brand: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Location',
+        ref: 'SubBrand',
       },
     ],
   },

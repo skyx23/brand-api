@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { Brand, User, Subject, Course } = require('../schemas/schema');
+const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
 const add_user = async (req, res) => {
   try {
     if (req.body.password != req.body.confirm_password) {
@@ -20,7 +20,10 @@ const add_user = async (req, res) => {
       password: password,
       role: req.body.role,
     });
-    await user.save();
+    const savedUser = await user.save(); 
+    await SubBrand.updateOne({subBrand_name : req.body.subBrand_name},{
+      $push : { user : savedUser._id}
+    })
     res.send(`${req.body.name} has been saved as a ${req.body.role}`);
   } catch (error) {
     console.log(error);
