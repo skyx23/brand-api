@@ -20,4 +20,17 @@ const brands = mongoose.Schema(
   { versionKey: false }
 );
 
+brands.pre('save', async function (next) {
+  try {
+    const data = this;
+    const user = await this.constructor.findOne({ user_name: data.user_name });
+    if (!user) {
+      next();
+    }else {
+      next(new Error("username must be unique"));
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = mongoose.model('Brand', brands);

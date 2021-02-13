@@ -7,8 +7,9 @@ const add_user = async (req, res) => {
     if (req.body.password != req.body.confirm_password) {
       return res.send('password do not match');
     }
-    const admin = await Brand.findOne({ _id: req.client._id });
-    if (!admin) {
+    const admin = req.client.user.brand_name;
+    const sudo_admin = req.client.user.role == 'admin';
+    if (!(admin || sudo_admin)) {
       return res.send('you need to be admin to add users');
     }
     const salt = await bcrypt.genSalt(10);

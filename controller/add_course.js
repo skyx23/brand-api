@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 
 const { Brand, User, Subject, Course } = require('../schemas/schema');
 const add_course = async (req, res) => {
-  const admin = await Brand.findOne({ _id: req.client._id });
-  if (!admin) {
+  const admin = req.client.user.brand_name;
+  const sudo_admin = req.client.user.role == 'admin';
+  if (!(admin || sudo_admin)) {
     return res.send('you need to be admin to add users');
   }
   if (await Course.findOne({ name: req.body.name })) {

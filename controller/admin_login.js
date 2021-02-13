@@ -19,7 +19,7 @@ const admin_login = async (req, res) => {
     if (!validPassword) {
       return res.send('password entered is incorrect');
     }
-    const token = jwt.sign({ _id: user._id }, process.env.SECRET);
+    const token = jwt.sign({ _id: user._id,user : user}, process.env.SECRET);
     res.header('token', token).send(`${user.user_name} logged in`);
   } catch (err) {
     console.log(err);

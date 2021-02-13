@@ -8,6 +8,7 @@ const add_course = require('./add_course');
 const add_user_subject = require('./add_user_subject');
 const add_sub_brand = require('./add_sub_brand');
 const getData = require('./getdata');
+const getbrand = require('./getbrand');
 module.exports = {
   admin_regiseter,
   admin_login,
@@ -18,5 +19,6 @@ module.exports = {
   add_course,
   add_user_subject,
   add_sub_brand,
-  getData
+  getData,
+  getbrand
 };
