@@ -4,7 +4,7 @@ dotenv.config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('../middlewares/validators')
-const { Brand, User, Subject, Course } = require('../schemas/schema');
+const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
 const verify = require('../middlewares/verify');
 const {
   admin_regiseter,
@@ -15,7 +15,8 @@ const {
   add_subject,
   add_course,
   add_user_subject,
-  add_sub_brand
+  add_sub_brand,
+  getData
 } = require('../controller/index');
 
 router.post('/register',validator, admin_regiseter);
@@ -35,8 +36,8 @@ router.post('/subject/add', verify, add_subject);
 router.post('/course/add', verify, add_course);
 
 router.post('/member/subject/add', verify, add_user_subject);
+router.get('/sub_brands',verify, getData)
 
 module.exports = router;
 
 
-// PORT = https://brandapi12.herokuapp.com/
