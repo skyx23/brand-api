@@ -8,9 +8,6 @@ const add_course = async (req, res) => {
   if (!(admin || sudo_admin)) {
     return res.send('you need to be admin to add users');
   }
-  if (await Course.findOne({ name: req.body.name })) {
-    return res.send('course with a same name already exists');
-  }
   const course = new Course({
     name: req.body.name,
     subject: req.body.subject,
