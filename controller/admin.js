@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const { Brand, User, Subject, Course } = require('../models/schema');
+const { Brand, User, Subject, Course,SubBrand } = require('../models/schema');
 
 const admin_register = async (req, res) => {
     try {
@@ -100,7 +100,7 @@ const admin_register = async (req, res) => {
         }
       );
       res.send(
-        `${req.body.subBrand_name} add to ${admin.brand_name} as a sub brand`
+        `${req.body.subBrand_name} add to ${admin} as a sub brand`
       );
     } catch (err) {
       console.log(err);
