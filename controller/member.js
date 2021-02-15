@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
+const { Brand, User, Subject, Course, SubBrand } = require('../models/schema');
 
 const add_user = async (req, res) => {
     try {

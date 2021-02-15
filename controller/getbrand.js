@@ -1,4 +1,4 @@
-const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
+const { Brand, User, Subject, Course, SubBrand } = require('../models/schema');
 const getbrand = async (req, res) => {
     try {
         const brand = await Brand.findOne({brand_name : req.body.brand_name})

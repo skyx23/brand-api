@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const { Brand, User, Subject, Course } = require('../schemas/schema');
+const { Brand, User, Subject, Course } = require('../models/schema');
 
 const admin_register = async (req, res) => {
     try {

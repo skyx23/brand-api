@@ -1,4 +1,4 @@
-const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
+const { Brand, User, Subject, Course, SubBrand } = require('../models/schema');
 const getData = async (req,res)=> {
     try {
       const sub_brand = await Brand.find().populate({path : 'sub_brand',populate : {path : 'user',populate : {path : 'subject'}}})

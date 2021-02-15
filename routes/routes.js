@@ -1,10 +1,7 @@
 const router = require('express').Router();
 const dotenv = require('dotenv');
 dotenv.config();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const validator = require('../middlewares/validators');
-const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
 const verify = require('../middlewares/verify');
 const {
   getData,
@@ -12,7 +9,6 @@ const {
   admin,
   member
 } = require('../controller/index');
-
 router.post('/register', validator, admin.admin_register);
 
 router.post('/login', validator, admin.admin_login);
