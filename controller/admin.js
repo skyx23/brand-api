@@ -94,7 +94,7 @@ const admin_register = async (req, res) => {
       });
       const saved = await newSubBrand.save();
       await Brand.updateMany(
-        { brand_name: admin.brand_name },
+        { brand_name: admin },
         {
           $push: { sub_brand: saved._id },
         }
