@@ -7,38 +7,32 @@ const validator = require('../middlewares/validators');
 const { Brand, User, Subject, Course, SubBrand } = require('../schemas/schema');
 const verify = require('../middlewares/verify');
 const {
-  admin_regiseter,
-  admin_login,
-  add_user,
-  get_user,
-  user_login,
-  add_subject,
-  add_course,
-  add_user_subject,
-  add_sub_brand,
   getData,
   getbrand,
+  admin,
+  member
 } = require('../controller/index');
 
-router.post('/register', validator, admin_regiseter);
+router.post('/register', validator, admin.admin_register);
 
-router.post('/login', validator, admin_login);
+router.post('/login', validator, admin.admin_login);
 
 router.get('/getbrand', getbrand);
 
-router.post('/sub_brand/add', verify, add_sub_brand);
+router.post('/sub_brand/add', verify, admin.add_sub_brand);
 
-router.post('/member/add', verify, validator, add_user);
+router.post('/member/add', verify, validator, member.add_user);
 
-router.get('/member/get', verify, get_user);
+router.get('/member/get', verify, member.get_user);
 
-router.post('/member/login', validator, user_login);
+router.post('/member/login', validator, member.user_login);
 
-router.post('/subject/add', verify, add_subject);
+router.post('/subject/add', verify, admin.add_subject);
 
-router.post('/course/add', verify, add_course);
+router.post('/course/add', verify, admin.add_course);
 
-router.post('/member/subject/add', verify, add_user_subject);
+router.post('/member/subject/add', verify, member.add_user_subject);
+
 router.get('/sub_brands', verify, getData);
 
 module.exports = router;
