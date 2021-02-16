@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const app = express();
 dotenv.config();
 const routes = require('./routes/routes');
+const fileupload = require('express-fileupload');
 const port = process.env.PORT || 4000;
 // connecting to database
 mongoose.connect(
@@ -19,6 +20,11 @@ mongoose.connect(
 );
 // middleware
 app.use(express.json());
+app.use(
+  fileupload({
+    useTempFiles: true,
+  })
+);
 //routing
 app.use('/brand', routes);
 // server setup

@@ -10,6 +10,9 @@ const brands = mongoose.Schema(
     password: {
       type: String,
     },
+    profilepic : {
+      type : String
+    },
     sub_brand: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,7 +26,7 @@ const brands = mongoose.Schema(
 brands.pre('save', async function (next) {
   try {
     const data = this;
-    const user = await this.constructor.findOne({ user_name: data.user_name });
+    const user = await this.constructor.findOne({ user_name: data.user_name,brand_name : data.brand_name });
     if (!user) {
       next();
     }else {

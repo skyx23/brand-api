@@ -8,7 +8,7 @@ const subject = mongoose.Schema({
 subject.pre('save', async function (next) {
     try {
         const data = this;
-        const subject = await this.constructor.findone({name : this.name});
+        const subject = await this.constructor.findOne({name : data.name});
         if (!subject) {
             next();
           }else {
