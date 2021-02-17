@@ -95,5 +95,56 @@ const profile_pic = async (req, res) => {
   }
 };
 
-const admin = { admin_register, admin_login, profile_pic };
+const get_admin = async (req, res) => {
+  try {
+    const id = req.client._id
+    const user = await Brand.find({_id : id}).populate('sub_brand');
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+};
+
+const delete_admin = async (req, res) => {
+  try {
+    const id = req.client._id;
+    const deleted = await Brand.deleteOne({ _id: id });
+    if (deleted) {
+      res.send('user has been deleted from the database');
+    } else {
+      res.send('user could not be deleted ');
+    }
+  } catch (err) {
+    console.log(error);
+    res.send(error);
+  }
+};
+
+const update_admin = async (req, res) => {
+  try {
+    const id = req.client._id;
+    const updated = await Brand.updateOne(
+      { _id: id },
+      { user_name: req.body.user_name }
+    );
+    if (updated) {
+      res.send("your user name has been updated")
+    }else {
+      res.send("your username could not  be updated")
+    }
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+};
+
+const admin = {
+  admin_register,
+  admin_login,
+  profile_pic,
+  get_admin,
+  delete_admin,
+  update_admin
+};
 module.exports = admin;

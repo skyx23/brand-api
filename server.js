@@ -5,6 +5,7 @@ const app = express();
 dotenv.config();
 const routes = require('./routes/routes');
 const fileupload = require('express-fileupload');
+const cors = require('cors');
 const port = process.env.PORT || 4000;
 // connecting to database
 mongoose.connect(
@@ -20,6 +21,7 @@ mongoose.connect(
 );
 // middleware
 app.use(express.json());
+app.use(cors());
 app.use(
   fileupload({
     useTempFiles: true,

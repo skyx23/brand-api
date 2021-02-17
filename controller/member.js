@@ -2,6 +2,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
+const fs = require('fs');
+const cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 const { Brand, User, Subject, Course, SubBrand } = require('../models/schema');
 
@@ -94,5 +101,57 @@ const add_user = async (req, res) => {
     }
   };
 
-  const member = {add_user,user_login,get_user,add_user_subject};
+  const delete_user = async (req, res) => {
+    try {
+      const id = req.client._id;
+      const deleted = await User.deleteOne({_id : id})
+      if(deleted) {
+        res.send("you are no longer affiliated to our brand")
+      }else {
+        res.send("your details could not be deleted")
+      }
+    } catch (error) {
+      console.log(error)
+      res.send(error)
+    }
+  }
+
+  const profile_pic = async (req, res) => {
+    try {
+      const file = req.files.profilepic;
+      if (!file)
+        return res.send({
+          status: '0',
+          message: 'failure',
+          data: 'please upload the file you want as profile pic',
+        });
+      const result = await cloudinary.uploader.upload(file.tempFilePath);
+      const user = await User.updateOne(
+        { _id: req.client._id },
+        { profilepic: result.url }
+      );
+      if (!user) {
+        return res.send({
+          status: '0',
+          message: 'failure',
+          data: 'could not update image',
+        });
+      }
+      fs.unlinkSync(file.tempFilePath);
+      res.send({
+        status: '1',
+        message: 'success',
+        data: 'successfully uploaded prfile image',
+      });
+    } catch (err) {
+      console.log(err);
+      res.send({
+        status: '0',
+        message: 'failure',
+        data: err,
+      });
+    }
+  };
+
+  const member = {add_user,user_login,get_user,add_user_subject,delete_user,profile_pic};
 module.exports = member

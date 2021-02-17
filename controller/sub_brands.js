@@ -70,8 +70,9 @@ const update_subbrand = async (req, res) => {
 const get_subbrand = async (req, res) => {
   try {
     isAdmin(req);
-    const data = await SubBrand.find().populate('user');
-    res.send(data);
+    const id = req.client._id
+    const data = await Brand.findOne({_id : id}).populate('sub_brand');
+    res.send(data.sub_brand);
   } catch (error) {
     console.log(error);
     res.send(error);

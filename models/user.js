@@ -12,6 +12,9 @@ const user = mongoose.Schema({
     password : {
         type : String
     },
+    profilepic : {
+        type : String
+    },
     subject : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Subject'
