@@ -67,7 +67,8 @@ const add_user = async (req, res) => {
 
   const get_user = async (req, res) => {
     try {
-      const users = await User.find({});
+      const id = req.client._id
+      const users = await User.find({_id : id});
       res.send(users);
     } catch (error) {
       console.log(error);

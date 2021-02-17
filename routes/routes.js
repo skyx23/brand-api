@@ -35,9 +35,9 @@ router.put('/sub_brand/delete',verify,sub_brand.delete_subbrand);
 router.post('/member/add', verify, validator, member.add_user);
 router.get('/member/get', verify, member.get_user);
 router.post('/member/login', validator, member.user_login);
-router.post('/member/subject/add', verify, member.add_user_subject);
+router.patch('/member/subject/add', verify, member.add_user_subject);
 router.put('/member/delete', verify, member.delete_user);
-router.put('/member/profile_pic',verify,member.profile_pic);
+router.patch('/member/profile_pic',verify,member.profile_pic);
 // subject
 router.post('/subject/add', verify, subject.add_subject);
 router.get('/subject/get', subject.get_subject)

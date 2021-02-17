@@ -25,7 +25,7 @@ const user = mongoose.Schema({
 user.pre('save', async function (next){
     try{
         const data = this
-        const user = await this.constructor.findone({user_name : this.user_name});
+        const user = await this.constructor.findOne({user_name : this.user_name});
         if (!user) {
             next();
         }else {
